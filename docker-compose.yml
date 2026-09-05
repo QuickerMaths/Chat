@@ -5,7 +5,7 @@ services:
     container_name: chat-sql
     environment:
       ACCEPT_EULA: "Y"
-      MSSQL_SA_PASSWORD: "Your_strong_Passw0rd!"
+      MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in a local .env file, see .env.example}"
       MSSQL_PID: "Developer"
     ports: ["14330:1433"]
     volumes: ["chat-sql-data:/var/opt/mssql"]
