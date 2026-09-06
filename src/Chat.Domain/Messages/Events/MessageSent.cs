@@ -1,12 +1,12 @@
+using Chat.Domain.Common;
 using Chat.Domain.Identifiers;
 
-namespace Chat.Domain.Messsages.Events;
+namespace Chat.Domain.Messages.Events;
 
 public sealed record MessageSent(
-    MessageId Id,
+    MessageId MessageId,
     RoomId RoomId,
     UserId AuthorId,
     string Body,
-    DateTimeOffset CreatedAtUtc,
-    DateTimeOffset OccuredAtUtc
-    );
+    DateTimeOffset SentAtUtc,
+    DateTimeOffset OccuredAtUtc) : IDomainEvent;
