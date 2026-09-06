@@ -25,7 +25,7 @@ public sealed class CreateRoomsHandlerTests
         var result = await CreateHandler().HandleAsync(new CreateRoomCommand("general"), CancellationToken.None);
         
         result.IsSuccess.Should().BeTrue();
-        result.Value!.Should().Be("general");
+        result.Value!.Name.Should().Be("general");
         _rooms.Received(1).Add(Arg.Any<ChatRoom>());
         await _unitOfWork.Received(1).SaveChangesAsync(Arg.Any<CancellationToken>());
     }

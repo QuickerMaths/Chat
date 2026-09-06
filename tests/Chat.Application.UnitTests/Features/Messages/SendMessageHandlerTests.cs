@@ -52,7 +52,7 @@ public sealed class SendMessageHandlerTests
         var result = await CreateHandler().HandleAsync(new SendMessageCommand(room.Id.Value, "hi", Guid.NewGuid()), CancellationToken.None);
         
         result.IsSuccess.Should().BeFalse();
-        result.Error!.Code.Should().Be("room.forbidden");
+        result.Error!.Code.Should().Be("room.not_member");
         result.Error!.Type.Should().Be(ErrorType.Forbidden);
     }
 

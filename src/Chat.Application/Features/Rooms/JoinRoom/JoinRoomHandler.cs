@@ -11,5 +11,17 @@ public sealed class JoinRoomHandler(
     )
 {
     public async Task<Result<bool>> HandleAsync(JoinRoomCommand command, CancellationToken ct)
-        => throw new NotImplementedException();
+    {
+        var room = await rooms.FindByIdAsync(command.id, ct);
+
+        if (room is null)
+            return Result<bool>.Failure(ApplicationError.NotFound("room.not_found", "This room does not exist."));
+
+        var joined = room.Join(userContext.UserId, clock.UtcNow);
+        if (!joined)
+            return Result<bool>.Success(false);
+
+        await unitOfWork.SaveChangesAsync(ct);
+        return Result<bool>.Success(true);
+    }
 }

@@ -19,7 +19,7 @@ public sealed class JoinRoomHandlerTests
     private JoinRoomHandler CreateHandler() => new(_rooms, _userContext, _unitOfWork, _clock);
     
     private ChatRoom RoomOwnedBy(UserId owner) 
-     => ChatRoom.Create(RoomId.New(), RoomName.Create("general"), _caller, _clock.UtcNow);
+     => ChatRoom.Create(RoomId.New(), RoomName.Create("general"), owner, _clock.UtcNow);
 
     [Fact]
     public async Task HandleAsync_ShouldReturnNotFound_WhenRoomMissing()

@@ -30,7 +30,7 @@ public sealed class GetMessagesHandlerTests
     [Fact]
     public async Task HandleAsync_ShouldClampLimitTo100_WhenLimitExceedsMaximum()
     {
-        var room =  RoomWithMember(UserId.New());
+        var room =  RoomWithMember(_caller);
         _rooms.FindByIdAsync(Arg.Any<RoomId>(), Arg.Any<CancellationToken>()).Returns(room);
         
         await CreateHandler().HandleAsync(new GetMessagesCommand(room.Id.Value, DateTimeOffset.UtcNow, 200), CancellationToken.None);
@@ -41,7 +41,7 @@ public sealed class GetMessagesHandlerTests
     [Fact]
     public async Task HandleAsync_ShouldDefaultLimitTo50_WhenLimitNotSupplied()
     {
-        var room =  RoomWithMember(UserId.New());
+        var room =  RoomWithMember(_caller);
         _rooms.FindByIdAsync(Arg.Any<RoomId>(), Arg.Any<CancellationToken>()).Returns(room);
         
         await CreateHandler().HandleAsync(new GetMessagesCommand(room.Id.Value, DateTimeOffset.UtcNow, null), CancellationToken.None);
