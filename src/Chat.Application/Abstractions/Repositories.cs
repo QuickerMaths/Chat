@@ -11,7 +11,7 @@ public interface IUserRepository
 {
     void Add(User user);
     Task<User?> FindByUsernameAsync(UserName userName, CancellationToken ct);
-    Task<bool> ExistsAsync(UserId userId, CancellationToken ct);
+    Task<bool> ExistsAsync(UserName userName, CancellationToken ct);
 }
 
 public interface IRoomRepository
