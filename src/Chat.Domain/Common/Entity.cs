@@ -1,12 +1,14 @@
 namespace Chat.Domain.Common;
 
-public abstract class Entity<TId>
-    where TId : notnull
+public abstract class Entity<TId> where TId : struct
 {
-    protected Entity(TId id)
-    {
-        Id = id;
-    }
+    private readonly List<IDomainEvent> _domainEvents = [];
+    
+    public TId Id { get; protected init; }
 
-    public TId Id { get; }
+    public IReadOnlyList<IDomainEvent> DomainEvents => _domainEvents;
+    
+    protected void Raise(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }
