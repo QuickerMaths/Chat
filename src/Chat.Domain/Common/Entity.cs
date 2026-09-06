@@ -1,6 +1,6 @@
 namespace Chat.Domain.Common;
 
-public abstract class Entity<TId> where TId : struct
+public abstract class Entity<TId> : IHasDomainEvents where TId : struct 
 {
     private readonly List<IDomainEvent> _domainEvents = [];
     
