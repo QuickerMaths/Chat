@@ -5,5 +5,5 @@ public sealed record RoomListItemDto(
     string Name,
     bool IsMember,
     int MemberCount,
-    DateTime CreatedUtcAt
+    DateTimeOffset CreatedUtcAt
     );
