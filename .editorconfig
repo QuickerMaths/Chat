@@ -392,3 +392,14 @@ dotnet_naming_style.s_camelcase.capitalization = camel_case
 # underscores; CA1707 would otherwise fail the build under warnings-as-errors.
 [tests/**/*.cs]
 dotnet_diagnostic.CA1707.severity = none
+
+# xUnit collection-definition marker types conventionally end in "Collection"
+# (e.g. FooCollection : ICollectionFixture<FooFixture>); CA1711 misreads the
+# suffix as implying ICollection/IEnumerable semantics, which doesn't apply.
+dotnet_diagnostic.CA1711.severity = none
+
+
+# EF Core migrations are scaffolded code; mark as generated so analyzers
+# (e.g. CA1861 on inline arrays passed to CreateIndex) don't fail the build.
+[**/Migrations/*.cs]
+generated_code = true

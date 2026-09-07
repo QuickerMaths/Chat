@@ -10,11 +10,17 @@
     <PackageReference Include="xunit.v3" />
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="AwesomeAssertions" />
+    <PackageReference Include="Testcontainers.MsSql" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Respawn" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
     <Using Include="AwesomeAssertions" />
+    <Using Include="Testcontainers.MsSql" />
+    <Using Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <Using Include="Respawn" />
   </ItemGroup>
 
   <ItemGroup>
