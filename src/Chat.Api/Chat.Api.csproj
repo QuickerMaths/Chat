@@ -1,10 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>              
     <ImplicitUsings>enable</ImplicitUsings>  
     <RootNamespace>Chat.Api</RootNamespace>
+    <UserSecretsId>b9bc296c-3ab3-4168-b76f-86ba67653a48</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
