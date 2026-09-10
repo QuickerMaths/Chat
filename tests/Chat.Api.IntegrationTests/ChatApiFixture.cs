@@ -1,11 +1,13 @@
 using System.Net.Http.Json;
+using Chat.Application.Contracts;
 using Chat.Infrastructure.Persistence;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Chat.Api.IntergrationTests;
+namespace Chat.Api.IntegrationTests;
 
 public sealed class ChatApiFixture : IAsyncLifetime
 {
@@ -26,7 +28,7 @@ public sealed class ChatApiFixture : IAsyncLifetime
             builder.ConfigureAppConfiguration((_, config) =>
                 config.AddInMemoryCollection(new Dictionary<string, string?>
                 {
-                    ["ConnectionStrings:DefaultConnection"] = _connectionString,
+                    ["ConnectionStrings:ChatDb"] = _connectionString,
                 })));
 
         using (var scope = _factory.Services.CreateScope())
@@ -43,6 +45,8 @@ public sealed class ChatApiFixture : IAsyncLifetime
     
     public HttpClient CreateClient() => _factory.CreateClient();
 
+    public TestServer Server => _factory.Server;
+
     public async Task ResetAsync()
     {
         await using var connection = new SqlConnection(_connectionString);
@@ -55,10 +59,10 @@ public sealed class ChatApiFixture : IAsyncLifetime
         var client = CreateClient();
         var credentials = new { userName, password = "Passw0rd!23" };
 
-        await client.PostAsJsonAsync("/auth/register", credentials);
-        var response = await client.PostAsJsonAsync("/auth/login", credentials);
+        await client.PostAsJsonAsync("/api/auth/register", credentials);
+        var response = await client.PostAsJsonAsync("/api/auth/login", credentials);
         
-        var token = await response.Content.ReadFromJsonAsync<AccessTokenResponse>();
+        var token = await response.Content.ReadFromJsonAsync<AccessTokenDto>();
         return token!.AccessToken;
     }
 
@@ -67,10 +71,4 @@ public sealed class ChatApiFixture : IAsyncLifetime
         await _factory.DisposeAsync();
         await _container.DisposeAsync();
     }
-
-    private sealed record AccessTokenResponse(
-        string AccessToken,
-        DateTimeOffset ExpiresAtUtc,
-        string UserName,
-        Guid UserId);
 }

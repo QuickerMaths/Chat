@@ -27,7 +27,7 @@
 - [ ] `dotnet build`
 - [ ] `dotnet test tests/Chat.Domain.UnitTests`
 - [ ] `dotnet test tests/Chat.Application.UnitTests`
-- [ ] `dotnet test tests/Chat.Api.IntergrationTests`
+- [ ] `dotnet test tests/Chat.Api.IntegrationTests`
 - [ ] `dotnet test tests/Chat.ArchitectureTests` (verifies layering/dependency rules)
 
 ## Checklist
