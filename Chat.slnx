@@ -6,7 +6,7 @@
     <Project Path="src\Chat.Domain\Chat.Domain.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Chat.Api.IntergrationTests/Chat.Api.IntergrationTests.csproj" />
+    <Project Path="tests/Chat.Api.IntegrationTests/Chat.Api.IntegrationTests.csproj" />
     <Project Path="tests/Chat.Application.UnitTests/Chat.Application.UnitTests.csproj" />
     <Project Path="tests/Chat.ArchitectureTests/Chat.ArchitectureTests.csproj" />
     <Project Path="tests/Chat.Domain.UnitTests/Chat.Domain.UnitTests.csproj" />

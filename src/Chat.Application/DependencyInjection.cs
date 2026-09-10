@@ -20,14 +20,13 @@ public static class DependencyInjection
         services.AddScoped<JoinRoomHandler>();
         services.AddScoped<ListRoomsHandler>();
         services.AddScoped<SendMessageHandler>();
-        services.AddScoped<SendMessageHandler>();
         services.AddScoped<GetMessagesHandler>();
 
-        services.AddScoped<IDomainEventsHandler<MessageSent>>();
+        services.AddScoped<IDomainEventsHandler<MessageSent>, MessageSentNotificationHandler>();
 
-        services.AddScoped<IValidator<RegisterUserCommand>>();
-        services.AddScoped<IValidator<LoginUserCommand>>();
-        services.AddScoped<IValidator<CreateRoomCommand>>();
+        services.AddScoped<IValidator<RegisterUserCommand>, RegisterUserCommandValidator>();
+        services.AddScoped<IValidator<CreateRoomCommand>, CreateRoomCommandValidator>();
+        services.AddScoped<IValidator<SendMessageCommand>, SendMessageCommandValidator>();
         
         return services;
     }
