@@ -34,6 +34,7 @@ public sealed class Message : Entity<MessageId>
         {
             Id = MessageId.New(),
             RoomId = room.Id,
+            AuthorId = authorId,
             Body = body,
             SentAtUtc = nowUtc,
             ClientMessageId = clientMessageId
